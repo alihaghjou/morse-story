@@ -1,3 +1,4 @@
+import TableModal from "@/components/TableModal";
 import { translateFunc } from "@/utils/supabase/Translate";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
@@ -19,7 +20,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     .select()
     .eq("id", params.id)
     .maybeSingle();
-    
+
   return (
     story && (
       <div>
@@ -28,6 +29,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         {story.story.map((para) => (
           <p>{translateFunc("text-morse", para)}</p>
         ))}
+        <TableModal />
       </div>
     )
   );

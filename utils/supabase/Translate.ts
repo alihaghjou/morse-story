@@ -1,4 +1,4 @@
-const MorseDoc = {
+export const MorseDoc = {
   "0": "-----",
   "1": ".----",
   "2": "..---",
