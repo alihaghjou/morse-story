@@ -2,18 +2,33 @@ import { translateFunc } from "@/utils/supabase/Translate";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 
+type DatabaseType = {
+  data: {
+    id: number;
+    created_at: string;
+    story: string[];
+    title: string;
+  } | null;
+};
+
 export default async function Page({ params }: { params: { id: string } }) {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
-  const {
-    data: story,
-  }: { data: { id: number; created_at: string; story: string[] } | null } =
-    await supabase.from("Story").select().eq("id", params.id).maybeSingle();
+  const { data: story }: DatabaseType = await supabase
+    .from("Story")
+    .select()
+    .eq("id", params.id)
+    .maybeSingle();
+    
   return (
-    <div>
-      {story?.story.map((para) => (
-        <p>{translateFunc("text-morse", para)}</p>
-      ))}
-    </div>
+    story && (
+      <div>
+        <h2>{story.title}</h2>
+        <h4>{story.created_at}</h4>
+        {story.story.map((para) => (
+          <p>{translateFunc("text-morse", para)}</p>
+        ))}
+      </div>
+    )
   );
 }
