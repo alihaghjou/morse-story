@@ -2,21 +2,38 @@ import { MorseDoc } from "@/utils/supabase/Morse";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 
-function translateFunc(originalText: string, MorseText?: string) {
-    //only works for text to morse for now
-  const lowered = originalText.toLowerCase();
+function translateFunc(
+  type: "text-morse" | "morse-text",
+  originalText: string
+) {
   const keys = Object.keys(MorseDoc);
   const values = Object.values(MorseDoc);
-  let TempMorse = "";
-  for (let i = 0; i < lowered.length; i++) {
-    if (lowered[i] === " ") {
-      TempMorse += " " + "/";
-    } else {
-      const index = keys.indexOf(lowered[i]);
-      TempMorse += " " + values[index];
-    }
+  switch (type) {
+    case "morse-text":
+      const splicedMorse = originalText.split(" ");
+      let TempText = "";
+      for (let i = 0; i < splicedMorse.length; i++) {
+        if (splicedMorse[i] === "/") {
+          TempText += " ";
+        } else {
+          const index = values.indexOf(splicedMorse[i]);
+          TempText += keys[index];
+        }
+      }
+      return TempText;
+    case "text-morse":
+      const lowered = originalText.toLowerCase();
+      let TempMorse = "";
+      for (let i = 0; i < lowered.length; i++) {
+        if (lowered[i] === " ") {
+          TempMorse += " " + "/";
+        } else {
+          const index = keys.indexOf(lowered[i]);
+          TempMorse += " " + values[index];
+        }
+      }
+      return TempMorse;
   }
-  return TempMorse;
 }
 
 export default async function Page({ params }: { params: { id: string } }) {
@@ -26,10 +43,11 @@ export default async function Page({ params }: { params: { id: string } }) {
     data: story,
   }: { data: { id: number; created_at: string; story: string[] } | null } =
     await supabase.from("Story").select().eq("id", params.id).maybeSingle();
+  translateFunc("morse-text", ".. - / ..-.");
   return (
     <div>
       {story?.story.map((para) => (
-        <p>{translateFunc(para)}</p>
+        <p>{translateFunc("text-morse", para)}</p>
       ))}
     </div>
   );
