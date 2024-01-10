@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Header() {
   const [value, setValue] = useState("");
   const [char, setChar] = useState(0);
-  var HeaderTxt = "Let's Do Some Fun with"; /* The text */
+  var HeaderTxt = "Let's Do Some Fun with";
   var speed = 50;
 
   setTimeout(() => {

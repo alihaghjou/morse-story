@@ -1,20 +1,17 @@
 import DeployButton from "../components/DeployButton";
 import AuthButton from "../components/AuthButton";
-import { createClient } from "@/utils/supabase/server";
 import SignUpUserSteps from "@/components/SignUpUserSteps";
 import Header from "@/components/Header";
-import { cookies } from "next/headers";
+import StorySection from "@/components/StorySection";
 
 //Todo: everyone can see the morse story
 //? auth users can see translated and add a paragraph and edit their own part
-//? a model that helps for translate
 //* in future a page for learning morse code
 //workflow: instead of next page part tutorial for website
 //after tutorial show stories
 //a page for each story with a translate button that replaces the morse code and a part for submitting paragraph
 
-export default async function Index() {
-  createClient(cookies());
+export default function Index() {
 
   return (
     <div className="flex-1 w-full flex flex-col gap-20 items-center">
@@ -30,6 +27,8 @@ export default async function Index() {
         <main className="flex-1 flex flex-col gap-6">
           <h2 className="font-bold text-4xl mb-4">Next steps</h2>
           <SignUpUserSteps />
+          <h2 className="font-bold text-4xl mb-4">Stories</h2>
+          <StorySection />
         </main>
       </div>
 
