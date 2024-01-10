@@ -3,7 +3,13 @@
 import { translateFunc } from "@/utils/supabase/Translate";
 import { useState } from "react";
 
-export default function TextStory({ para }: { para: string }) {
+export default function TextStory({
+  para,
+  isAuth,
+}: {
+  para: string;
+  isAuth: boolean;
+}) {
   const [paragraph, setPara] = useState({
     text: translateFunc("text-morse", para),
     textType: "morse",
@@ -23,13 +29,15 @@ export default function TextStory({ para }: { para: string }) {
   return (
     <>
       <p>{paragraph.text}</p>
-      <button onClick={handleTranslatePara}>
-        {paragraph.textType === "morse" ? (
-          <span>Translate</span>
-        ) : (
-          <span>Back</span>
-        )}
-      </button>
+      {isAuth && (
+        <button onClick={handleTranslatePara}>
+          {paragraph.textType === "morse" ? (
+            <span>Translate</span>
+          ) : (
+            <span>Back</span>
+          )}
+        </button>
+      )}
     </>
   );
 }
