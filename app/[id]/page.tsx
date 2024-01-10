@@ -2,6 +2,7 @@ import TableModal from "@/components/TableModal";
 import { translateFunc } from "@/utils/supabase/Translate";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
+import TextStory from "./TextStory";
 
 type DatabaseType = {
   data: {
@@ -27,7 +28,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         <h2>{story.title}</h2>
         <h4>{story.created_at}</h4>
         {story.story.map((para) => (
-          <p>{translateFunc("text-morse", para)}</p>
+          <TextStory para={para} />
         ))}
         <TableModal />
       </div>
