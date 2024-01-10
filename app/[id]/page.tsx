@@ -36,7 +36,6 @@ export default async function Page({ params }: { params: { id: string } }) {
         {story.story.map((para) => (
           <TextStory para={para} isAuth={isAuth} />
         ))}
-        <TableModal />
       </div>
     )
   );

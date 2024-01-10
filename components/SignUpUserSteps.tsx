@@ -52,7 +52,7 @@ export default function Page() {
 
 export default function SignUpUserSteps() {
   return (
-    <ol className="flex flex-col gap-6">
+    <ol className="flex flex-col gap-6 p-2 rounded dark:bg-zinc-950 bg-zinc-100">
       <Step title="Sign up your first user">
         <p>
           Head over to the{' '}

@@ -6,7 +6,7 @@ export default async function StorySection() {
     const {data} = await supabase.from("Story").select("title")
     console.log(data)
   return (
-    <div>
+    <div className="dark:bg-neutral-950 bg-neutral-100 p-2 rounded">
         {data?.map((info) => (
             <div className="mx-4">{info.title}</div>
         ))}
