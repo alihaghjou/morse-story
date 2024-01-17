@@ -78,7 +78,7 @@ export default function TableModal() {
                       </thead>
                       <tbody className="bg-white dark:bg-slate-800">
                         {Object.entries(MorseDoc).map((row) => (
-                          <tr>
+                          <tr key={row[0]}>
                             <td className="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
                               {row[0]}
                             </td>

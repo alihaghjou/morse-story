@@ -10,15 +10,16 @@ import StorySection from "@/components/StorySection";
 //a page for each story with a translate button that replaces the morse code and a part for submitting paragraph
 
 export default function Index() {
+  
 
   return (
     <div className="flex-1 w-full flex flex-col gap-20 items-center">
       <div className="animate-in flex-1 flex flex-col gap-20 opacity-0 max-w-4xl px-3">
         <Header />
         <main className="flex-1 flex flex-col gap-6">
-          <h2 className="font-bold text-4xl mb-4">Next steps</h2>
+          {/* <h2 className="font-bold text-4xl mb-4">Next steps</h2>
           <SignUpUserSteps />
-          <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent my-8" />
+          <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent my-8" /> */}
           <h2 className="font-bold text-4xl mb-4">Stories</h2>
           <StorySection />
         </main>
