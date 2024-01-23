@@ -4,14 +4,13 @@ import StorySection from "@/components/StorySection";
 
 //Todo: everyone can see the morse story (done)
 //? auth users can see translated and add a paragraph and edit their own part
+//? in future by submitting people get points
 //* in future a page for learning morse code
 //workflow: instead of next page part tutorial for website
 //after tutorial show stories
 //a page for each story with a translate button that replaces the morse code and a part for submitting paragraph
 
 export default function Index() {
-  
-
   return (
     <div className="flex-1 w-full flex flex-col gap-20 items-center">
       <div className="animate-in flex-1 flex flex-col gap-20 opacity-0 max-w-4xl px-3">

@@ -1,7 +1,7 @@
-import TableModal from "@/components/TableModal";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import TextStory from "./TextStory";
+import InsertPara from "./InsertPara";
 
 type DatabaseType = {
   data: {
@@ -13,14 +13,14 @@ type DatabaseType = {
 };
 
 export default async function Page({ params }: { params: { id: string } }) {
-  let isAuth = false
+  let isAuth = false;
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
-  const {data: user} = await supabase.auth.getUser()
+  const { data: user } = await supabase.auth.getUser();
   if (user.user) {
-    isAuth = true
+    isAuth = true;
   } else {
-    isAuth = false
+    isAuth = false;
   }
   const { data: story }: DatabaseType = await supabase
     .from("Story")
@@ -30,12 +30,13 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   return (
     story && (
-      <div>
+      <div className="w-full p-4 flex justify-center items-center flex-col">
         <h2>{story.title}</h2>
         <h4>{story.created_at}</h4>
         {story.story.map((para) => (
           <TextStory para={para} isAuth={isAuth} />
         ))}
+        <InsertPara />
       </div>
     )
   );
